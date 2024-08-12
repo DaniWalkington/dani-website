@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import * as fs from 'fs';
 
 @Component({
   selector: 'app-blog',
@@ -12,19 +13,22 @@ export class BlogComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.loadDocument();
+    this.loadDocument('assets/sensitive-docs/Passivity.txt');
+    this.getDocumentList;
   }
 
-  loadDocument() {
-    this.http
-      .get('assets/sensitive-docs/Passivity.txt', { responseType: 'text' })
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.error('Error loading document', error);
-        }
-      );
+  loadDocument(route: string) {
+    this.http.get(route, { responseType: 'text' }).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.error('Error loading document', error);
+      }
+    );
+  }
+  getDocumentList() {
+    var files = fs.readdirSync('/assets/sensitive-docs/');
+    console.log(files);
   }
 }
