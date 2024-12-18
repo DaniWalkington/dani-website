@@ -1,3 +1,6 @@
 .navbar-div {
   background-color: beige;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
 }
